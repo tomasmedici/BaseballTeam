@@ -10,7 +10,22 @@ namespace ClassesAndObjects
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BaseballTeam sf = new BaseballTeam("San Francisco Giants",
+                                                "Candlestick Park");
+
+            sf.PlayGame(7, 1);
+            sf.PlayGame(500, 5);
+            sf.PlayGame(BaseballTeam.Result.Win);
+            sf.PlayGame(BaseballTeam.Result.Lose);
+
+            Console.Out.WriteLine("Record: " + sf.Record);
+            sf.Ballpark = "3Com Park";
+
+            Console.Out.WriteLine(sf.ToString());
+
+            sf = null;
+
+            // Console.WriteLine("Hello World!");
             Console.ReadKey();
         }
     }
