@@ -9,18 +9,27 @@ namespace ClassesAndObjects
 
     class BaseballTeam
     {
-        private string name;
+        public string name;
         private string stadium;
+        //public BaseballPlayer playerOne;
+        //public BaseballPlayer playerTwo;
+        //public BaseballPlayer playerThree;
+        //public BaseballPlayer playerFour;
+        public BaseballPlayer[] players;
         private int wins = 0;
         private int defeats = 0;
         private int draws = 0;
-
-
-
-        public BaseballTeam(string n, string s)
+        private int cancelled_due_to_seagulls = 0;
+                
+        public BaseballTeam(string n, string s, BaseballPlayer[] pls) // BaseballPlayer p1, BaseballPlayer p2, BaseballPlayer p3, BaseballPlayer p4)
         {
             this.name = n;
             this.stadium = s;
+            //this.playerOne = p1;
+            //this.playerTwo = p2;
+            //this.playerThree = p3;
+            //this.playerFour = p4;
+            this.players = pls; //  new BaseballPlayer[] { this.playerOne, this.playerTwo, this.playerThree, this.playerFour };
         }
 
         public void PlayGame(int runsFor, int runsAgainst)
@@ -33,6 +42,10 @@ namespace ClassesAndObjects
             {
                 this.defeats++;
             }
+            else if (runsAgainst == 99)
+            {
+                this.cancelled_due_to_seagulls++;
+            }
             else
             {
                 this.draws++;
@@ -41,10 +54,10 @@ namespace ClassesAndObjects
 
         public override string ToString()
         {
-            return this.name + ", play at " + this.stadium + ": " + " W:" + this.wins + " L:" + this.defeats + " D:" + this.draws;
+            return this.name + ", play at " + this.stadium + ": " + " W:" + this.wins + " L:" + this.defeats + " D:" + this.draws + " C:" + this.cancelled_due_to_seagulls;
         }
 
-        public enum Result { Win, Lose, Draw }
+        public enum Result { Win, Lose, Draw, Cancelled }
 
         public void PlayGame(Result r)
         {
@@ -52,6 +65,8 @@ namespace ClassesAndObjects
                 this.wins++;
             else if (r == Result.Lose)
                 this.defeats++;
+            else if (r == Result.Cancelled)
+                this.cancelled_due_to_seagulls++;
             else
                 this.draws++;
         }
